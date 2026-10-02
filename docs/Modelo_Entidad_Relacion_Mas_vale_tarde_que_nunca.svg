@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="690" viewBox="0 0 1220 690" font-family="DejaVu Sans, Arial, sans-serif">
+<rect width="1220" height="690" fill="#ffffff"/>
+<text x="610.0" y="28" text-anchor="middle" font-size="20" font-weight="bold" fill="#12304f">Modelo entidad-relación · Más vale tarde que nunca</text>
+<polyline points="340,70 880,70" fill="none" stroke="#5b6b7c" stroke-width="2"/>
+<text x="610" y="60" font-size="13" font-style="italic" fill="#5b6b7c">autoriza</text>
+<text x="350" y="62" font-size="14" font-weight="bold" fill="#f5a623">1</text>
+<text x="862" y="62" font-size="14" font-weight="bold" fill="#f5a623">N</text>
+<polyline points="340,150 400,150 400,270 460,270" fill="none" stroke="#5b6b7c" stroke-width="2"/>
+<text x="404" y="215" font-size="13" font-style="italic" fill="#5b6b7c">registra</text>
+<text x="348" y="142" font-size="14" font-weight="bold" fill="#f5a623">1</text>
+<text x="430" y="262" font-size="14" font-weight="bold" fill="#f5a623">N</text>
+<polyline points="340,480 400,480 400,335 460,335" fill="none" stroke="#5b6b7c" stroke-width="2"/>
+<text x="404" y="410" font-size="13" font-style="italic" fill="#5b6b7c">tiene</text>
+<text x="348" y="472" font-size="14" font-weight="bold" fill="#f5a623">1</text>
+<text x="430" y="327" font-size="14" font-weight="bold" fill="#f5a623">N</text>
+<polyline points="760,295 820,295 820,200 880,200" fill="none" stroke="#5b6b7c" stroke-width="2"/>
+<text x="824" y="250" font-size="13" font-style="italic" fill="#5b6b7c">recibe</text>
+<text x="768" y="287" font-size="14" font-weight="bold" fill="#f5a623">1</text>
+<text x="852" y="192" font-size="14" font-weight="bold" fill="#f5a623">1</text>
+<rect x="40" y="40" width="300" height="225" rx="8" fill="#f4f7fb" stroke="#12304f" stroke-width="2"/>
+<path d="M40,76 V48 a8,8 0 0 1 8,-8 H332 a8,8 0 0 1 8,8 V76 Z" fill="#12304f"/>
+<text x="190.0" y="64" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">usuarios</text>
+<text x="52" y="94" font-size="12" font-weight="bold" fill="#f5a623">PK</text>
+<text x="84" y="94" font-size="14" fill="#12304f">id_usuario</text>
+<text x="328" y="94" text-anchor="end" font-size="12" fill="#5b6b7c">INT</text>
+<text x="84" y="121" font-size="14" fill="#12304f">nombre</text>
+<text x="328" y="121" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(100)</text>
+<text x="84" y="148" font-size="14" fill="#12304f">correo</text>
+<text x="328" y="148" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(120) UNIQUE</text>
+<text x="84" y="175" font-size="14" fill="#12304f">contrasena</text>
+<text x="328" y="175" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(255)</text>
+<text x="84" y="202" font-size="14" fill="#12304f">rol</text>
+<text x="328" y="202" text-anchor="end" font-size="12" fill="#5b6b7c">ENUM</text>
+<text x="84" y="229" font-size="14" fill="#12304f">activo</text>
+<text x="328" y="229" text-anchor="end" font-size="12" fill="#5b6b7c">TINYINT(1)</text>
+<text x="84" y="256" font-size="14" fill="#12304f">creado_en</text>
+<text x="328" y="256" text-anchor="end" font-size="12" fill="#5b6b7c">TIMESTAMP</text>
+<rect x="40" y="380" width="300" height="252" rx="8" fill="#f4f7fb" stroke="#12304f" stroke-width="2"/>
+<path d="M40,416 V388 a8,8 0 0 1 8,-8 H332 a8,8 0 0 1 8,8 V416 Z" fill="#12304f"/>
+<text x="190.0" y="404" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">estudiantes</text>
+<text x="52" y="434" font-size="12" font-weight="bold" fill="#f5a623">PK</text>
+<text x="84" y="434" font-size="14" fill="#12304f">id_estudiante</text>
+<text x="328" y="434" text-anchor="end" font-size="12" fill="#5b6b7c">INT</text>
+<text x="84" y="461" font-size="14" fill="#12304f">documento</text>
+<text x="328" y="461" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(20) UNIQUE</text>
+<text x="84" y="488" font-size="14" fill="#12304f">nombres</text>
+<text x="328" y="488" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(80)</text>
+<text x="84" y="515" font-size="14" fill="#12304f">apellidos</text>
+<text x="328" y="515" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(80)</text>
+<text x="84" y="542" font-size="14" fill="#12304f">grado</text>
+<text x="328" y="542" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(5)</text>
+<text x="84" y="569" font-size="14" fill="#12304f">grupo</text>
+<text x="328" y="569" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(5)</text>
+<text x="84" y="596" font-size="14" fill="#12304f">activo</text>
+<text x="328" y="596" text-anchor="end" font-size="12" fill="#5b6b7c">TINYINT(1)</text>
+<text x="84" y="623" font-size="14" fill="#12304f">creado_en</text>
+<text x="328" y="623" text-anchor="end" font-size="12" fill="#5b6b7c">TIMESTAMP</text>
+<rect x="460" y="200" width="300" height="198" rx="8" fill="#f4f7fb" stroke="#12304f" stroke-width="2"/>
+<path d="M460,236 V208 a8,8 0 0 1 8,-8 H752 a8,8 0 0 1 8,8 V236 Z" fill="#12304f"/>
+<text x="610.0" y="224" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">llegadas_tarde</text>
+<text x="472" y="254" font-size="12" font-weight="bold" fill="#f5a623">PK</text>
+<text x="504" y="254" font-size="14" fill="#12304f">id_llegada</text>
+<text x="748" y="254" text-anchor="end" font-size="12" fill="#5b6b7c">INT</text>
+<text x="472" y="281" font-size="12" font-weight="bold" fill="#2e9e5b">FK</text>
+<text x="504" y="281" font-size="14" fill="#12304f">id_estudiante</text>
+<text x="748" y="281" text-anchor="end" font-size="12" fill="#5b6b7c">INT</text>
+<text x="472" y="308" font-size="12" font-weight="bold" fill="#2e9e5b">FK</text>
+<text x="504" y="308" font-size="14" fill="#12304f">id_docente</text>
+<text x="748" y="308" text-anchor="end" font-size="12" fill="#5b6b7c">INT</text>
+<text x="504" y="335" font-size="14" fill="#12304f">fecha_hora</text>
+<text x="748" y="335" text-anchor="end" font-size="12" fill="#5b6b7c">DATETIME</text>
+<text x="504" y="362" font-size="14" fill="#12304f">motivo</text>
+<text x="748" y="362" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(255)</text>
+<text x="504" y="389" font-size="14" fill="#12304f">estado</text>
+<text x="748" y="389" text-anchor="end" font-size="12" fill="#5b6b7c">ENUM</text>
+<rect x="880" y="40" width="300" height="198" rx="8" fill="#f4f7fb" stroke="#12304f" stroke-width="2"/>
+<path d="M880,76 V48 a8,8 0 0 1 8,-8 H1172 a8,8 0 0 1 8,8 V76 Z" fill="#12304f"/>
+<text x="1030.0" y="64" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">permisos</text>
+<text x="892" y="94" font-size="12" font-weight="bold" fill="#f5a623">PK</text>
+<text x="924" y="94" font-size="14" fill="#12304f">id_permiso</text>
+<text x="1168" y="94" text-anchor="end" font-size="12" fill="#5b6b7c">INT</text>
+<text x="892" y="121" font-size="12" font-weight="bold" fill="#2e9e5b">FK</text>
+<text x="924" y="121" font-size="14" fill="#12304f">id_llegada</text>
+<text x="1168" y="121" text-anchor="end" font-size="12" fill="#5b6b7c">INT UNIQUE</text>
+<text x="892" y="148" font-size="12" font-weight="bold" fill="#2e9e5b">FK</text>
+<text x="924" y="148" font-size="14" fill="#12304f">id_coordinador</text>
+<text x="1168" y="148" text-anchor="end" font-size="12" fill="#5b6b7c">INT</text>
+<text x="924" y="175" font-size="14" fill="#12304f">decision</text>
+<text x="1168" y="175" text-anchor="end" font-size="12" fill="#5b6b7c">ENUM</text>
+<text x="924" y="202" font-size="14" fill="#12304f">observacion</text>
+<text x="1168" y="202" text-anchor="end" font-size="12" fill="#5b6b7c">VARCHAR(255)</text>
+<text x="924" y="229" font-size="14" fill="#12304f">fecha_decision</text>
+<text x="1168" y="229" text-anchor="end" font-size="12" fill="#5b6b7c">DATETIME</text>
+<text x="460" y="520" font-size="13" fill="#5b6b7c">PK = llave primaria · FK = llave foránea</text>
+<text x="460" y="542" font-size="13" fill="#5b6b7c">1 = uno · N = muchos</text>
+<text x="460" y="564" font-size="13" fill="#5b6b7c">Una llegada tarde tiene como máximo un permiso (relación 1 a 1).</text>
+</svg>
