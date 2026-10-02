@@ -1,0 +1,31 @@
+:root { --azul:#12304f; --verde:#2e9e5b; --naranja:#f5a623; --gris:#5b6b7c; --fondo:#f4f7fb; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: Arial, Helvetica, sans-serif; background:var(--fondo); color:var(--azul); }
+.cabecera { background:var(--azul); color:#fff; padding:16px 24px; }
+.cabecera h1 { margin:0; font-size:1.4rem; }
+.cabecera p { margin:4px 0 0; color:var(--naranja); font-size:.9rem; }
+.menu { display:flex; flex-wrap:wrap; gap:8px; padding:12px 24px; background:#fff; border-bottom:1px solid #d5dde6; }
+.menu button { background:#fff; color:var(--azul); border:1px solid var(--azul); }
+.menu button.activo { background:var(--azul); color:#fff; }
+.contenido { max-width:960px; margin:0 auto; padding:20px 24px; }
+h2 { margin-top:0; }
+button { background:var(--verde); color:#fff; border:0; border-radius:6px; padding:9px 14px; cursor:pointer; font-size:.9rem; }
+button.secundario { background:#fff; color:var(--azul); border:1px solid var(--azul); }
+input, select { padding:9px; border:1px solid #bfc9d4; border-radius:6px; font-size:.9rem; min-width:0; }
+.formulario { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.formulario.vertical { flex-direction:column; max-width:480px; }
+.buscador { width:100%; margin-bottom:6px; }
+.tabla-scroll { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; background:#fff; }
+th { background:var(--azul); color:#fff; text-align:left; }
+th, td { padding:8px 10px; border-bottom:1px solid #e1e7ee; font-size:.88rem; }
+tr.reincidente td { background:#fff3dc; }
+.tarjeta { background:#fff; border:1px solid #d5dde6; border-radius:8px; padding:12px; margin-bottom:10px; display:flex; flex-direction:column; gap:8px; }
+.acciones { display:flex; gap:8px; }
+.nota { color:var(--gris); font-size:.85rem; }
+.ok { color:var(--verde); font-weight:bold; }
+.error { color:#b3261e; font-weight:bold; }
+.etiqueta { padding:2px 8px; border-radius:10px; font-size:.78rem; color:#fff; }
+.etiqueta.pendiente { background:var(--naranja); }
+.etiqueta.autorizada { background:var(--verde); }
+.etiqueta.no_autorizada { background:#b3261e; }
