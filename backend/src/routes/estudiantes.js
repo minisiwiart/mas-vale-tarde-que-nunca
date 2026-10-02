@@ -1,56 +1,40 @@
-const router = require('express').Router();
-const pool = require('../db');
+import { Router } from "express"
+import { pool } from "../db.js"
+import { requiereRol } from "../auth.js"
 
-// Listar (con búsqueda opcional por nombre, apellido o documento)
-router.get('/', async (req, res, next) => {
+const r = Router()
+
+r.get("/", async (req, res) => {
+  const w = [], p = []
+  if (req.query.q) { w.push("(CONCAT(e.nombres,' ',e.apellidos) LIKE ? OR e.documento LIKE ?)"); p.push(`%${req.query.q}%`, `%${req.query.q}%`) }
+  if (req.query.grupo) { w.push("e.grupo = ?"); p.push(req.query.grupo) }
+  if (req.query.activos) w.push("e.activo = 1")
+  const [rows] = await pool.query(
+    `SELECT e.id_estudiante AS id, e.documento, e.nombres, e.apellidos,
+            CONCAT(e.nombres,' ',e.apellidos) AS nombre, e.grupo, e.activo,
+            COUNT(l.id_llegada) AS total
+     FROM estudiantes e LEFT JOIN llegadas_tarde l ON l.id_estudiante = e.id_estudiante
+     ${w.length ? "WHERE " + w.join(" AND ") : ""}
+     GROUP BY e.id_estudiante ORDER BY e.apellidos, e.nombres LIMIT 300`, p)
+  res.json(rows)
+})
+
+r.post("/", requiereRol("coordinador", "rector"), async (req, res) => {
+  const { documento, nombres, apellidos, grupo } = req.body || {}
+  if (!documento || !nombres || !apellidos) return res.status(400).json({ error: "Documento, nombres y apellidos son obligatorios." })
   try {
-    const q = `%${(req.query.q || '').trim()}%`;
-    const [rows] = await pool.query(
-      `SELECT id_estudiante, documento, nombres, apellidos, grado, grupo, activo
-       FROM estudiantes
-       WHERE activo = 1 AND (nombres LIKE ? OR apellidos LIKE ? OR documento LIKE ?)
-       ORDER BY apellidos, nombres`,
-      [q, q, q]
-    );
-    res.json(rows);
-  } catch (e) { next(e); }
-});
+    await pool.query("INSERT INTO estudiantes (documento, nombres, apellidos, grupo) VALUES (?, ?, ?, ?)",
+      [documento.trim(), nombres.trim(), apellidos.trim(), grupo || null])
+    res.status(201).json({ ok: true })
+  } catch (e) {
+    if (e.code === "ER_DUP_ENTRY") return res.status(409).json({ error: "Ya existe un estudiante con ese documento." })
+    throw e
+  }
+})
 
-// Crear
-router.post('/', async (req, res, next) => {
-  try {
-    const { documento, nombres, apellidos, grupo } = req.body;
-    if (!documento || !nombres || !apellidos) {
-      return res.status(400).json({ error: 'Documento, nombres y apellidos son obligatorios' });
-    }
-    const [r] = await pool.query(
-      'INSERT INTO estudiantes (documento, nombres, apellidos, grado, grupo) VALUES (?, ?, ?, ?, ?)',
-      [documento.trim(), nombres.trim(), apellidos.trim(), '11', grupo || null]
-    );
-    res.status(201).json({ id_estudiante: r.insertId });
-  } catch (e) { next(e); }
-});
+r.patch("/:id/activo", requiereRol("coordinador", "rector"), async (req, res) => {
+  await pool.query("UPDATE estudiantes SET activo = ? WHERE id_estudiante = ?", [req.body?.activo ? 1 : 0, req.params.id])
+  res.json({ ok: true })
+})
 
-// Editar
-router.put('/:id', async (req, res, next) => {
-  try {
-    const { documento, nombres, apellidos, grupo } = req.body;
-    const [r] = await pool.query(
-      'UPDATE estudiantes SET documento = ?, nombres = ?, apellidos = ?, grupo = ? WHERE id_estudiante = ?',
-      [documento, nombres, apellidos, grupo || null, req.params.id]
-    );
-    if (!r.affectedRows) return res.status(404).json({ error: 'Estudiante no encontrado' });
-    res.json({ ok: true });
-  } catch (e) { next(e); }
-});
-
-// Desactivar (no se borra, para conservar el historial)
-router.patch('/:id/desactivar', async (req, res, next) => {
-  try {
-    const [r] = await pool.query('UPDATE estudiantes SET activo = 0 WHERE id_estudiante = ?', [req.params.id]);
-    if (!r.affectedRows) return res.status(404).json({ error: 'Estudiante no encontrado' });
-    res.json({ ok: true });
-  } catch (e) { next(e); }
-});
-
-module.exports = router;
+export default r

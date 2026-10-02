@@ -1,32 +1,29 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const pool = require('./db');
+import express from "express"
+import cors from "cors"
+import "dotenv/config"
+import { requiereSesion, requiereRol } from "./auth.js"
+import authRoutes from "./routes/auth.js"
+import llegadas from "./routes/llegadas.js"
+import estudiantes from "./routes/estudiantes.js"
+import reportes from "./routes/reportes.js"
+import usuarios from "./routes/usuarios.js"
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+const app = express()
+app.use(cors({ origin: process.env.FRONTEND_URL || true }))
+app.use(express.json())
 
-app.get('/api/salud', async (_req, res) => {
-  try {
-    await pool.query('SELECT 1');
-    res.json({ ok: true, baseDeDatos: 'conectada' });
-  } catch (e) {
-    res.status(500).json({ ok: false, error: 'No se pudo conectar a la base de datos' });
-  }
-});
+app.get("/api/salud", (_req, res) => res.json({ ok: true }))
+app.use("/api/auth", authRoutes)
+app.use("/api/llegadas", requiereSesion, llegadas)
+app.use("/api/estudiantes", requiereSesion, estudiantes)
+app.use("/api/reportes", requiereSesion, requiereRol("coordinador", "rector"), reportes)
+app.use("/api/usuarios", requiereSesion, requiereRol("rector"), usuarios)
 
-app.use('/api/estudiantes', require('./routes/estudiantes'));
-app.use('/api/llegadas', require('./routes/llegadas'));
-app.use('/api/permisos', require('./routes/permisos'));
-app.use('/api/reportes', require('./routes/reportes'));
-
-// Manejo general de errores
+// Errores no controlados (por ejemplo, la base de datos apagada)
 app.use((err, _req, res, _next) => {
-  console.error(err);
-  if (err.code === 'ER_DUP_ENTRY') return res.status(409).json({ error: 'Ya existe un registro con ese dato' });
-  res.status(500).json({ error: 'Error interno del servidor' });
-});
+  console.error(err)
+  res.status(500).json({ error: "Error del servidor. Revisa la conexión con la base de datos." })
+})
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`API lista en http://localhost:${PORT}`));
+const port = process.env.PORT || 3000
+app.listen(port, () => console.log(`Backend listo en http://localhost:${port}`))
